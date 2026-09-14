@@ -1,0 +1,690 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mini Game Center 🎮</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #141e30, #243b55);
+            color: white;
+            min-height: 100vh;
+        }
+
+        header {
+            text-align: center;
+            padding: 30px 15px;
+        }
+
+        header h1 {
+            font-size: 42px;
+            margin: 0 0 10px;
+        }
+
+        header p {
+            color: #ccc;
+        }
+
+        .games {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            max-width: 1100px;
+            margin: auto;
+            padding: 20px;
+        }
+
+        .game {
+            background: rgba(255,255,255,0.1);
+            border: 1px solid rgba(255,255,255,0.15);
+            border-radius: 20px;
+            padding: 20px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+        }
+
+        .game h2 {
+            margin-top: 0;
+        }
+
+        button {
+            border: none;
+            border-radius: 12px;
+            padding: 12px 18px;
+            margin: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            background: #00c6ff;
+            color: white;
+            transition: 0.2s;
+        }
+
+        button:hover {
+            transform: scale(1.05);
+            background: #0072ff;
+        }
+
+        input {
+            padding: 12px;
+            border-radius: 10px;
+            border: none;
+            width: 120px;
+            font-size: 16px;
+        }
+
+        .result {
+            min-height: 25px;
+            margin-top: 10px;
+            font-weight: bold;
+        }
+
+        /* Klikspel */
+        #clickArea {
+            height: 150px;
+            background: #222;
+            border-radius: 15px;
+            position: relative;
+            margin-top: 10px;
+            overflow: hidden;
+        }
+
+        #target {
+            display: none;
+            position: absolute;
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            background: red;
+            cursor: pointer;
+        }
+
+        /* Memory */
+        #memory {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 8px;
+            max-width: 300px;
+            margin: 15px auto;
+        }
+
+        .card {
+            height: 60px;
+            background: #333;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 10px;
+            font-size: 25px;
+            cursor: pointer;
+        }
+
+        .card.open {
+            background: #00a8ff;
+        }
+
+        /* Snake */
+        #snakeCanvas {
+            background: #111;
+            display: block;
+            margin: auto;
+            border-radius: 10px;
+        }
+
+        footer {
+            text-align: center;
+            padding: 30px;
+            color: #aaa;
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <h1>🎮 Mini Game Center</h1>
+    <p>Speel verschillende spelletjes!</p>
+</header>
+
+<main class="games">
+
+    <!-- KLIK GAME -->
+    <section class="game">
+        <h2>🎯 Klik zo snel mogelijk</h2>
+
+        <p id="clickInfo">
+            Klik op start en raak de rode bol zo snel mogelijk!
+        </p>
+
+        <button onclick="startClickGame()">Start</button>
+
+        <div id="clickArea">
+            <div id="target" onclick="hitTarget()"></div>
+        </div>
+
+        <div class="result" id="clickResult"></div>
+    </section>
+
+
+    <!-- RAAD HET GETAL -->
+    <section class="game">
+        <h2>🔢 Raad het getal</h2>
+
+        <p>Ik denk aan een getal tussen 1 en 100.</p>
+
+        <input id="guessInput" type="number" min="1" max="100">
+        <button onclick="guessNumber()">Raad</button>
+
+        <div class="result" id="guessResult"></div>
+    </section>
+
+
+    <!-- STEEN PAPIER SCHAAR -->
+    <section class="game">
+        <h2>✊ Steen, papier, schaar</h2>
+
+        <button onclick="playRPS('steen')">✊</button>
+        <button onclick="playRPS('papier')">📄</button>
+        <button onclick="playRPS('schaar')">✂️</button>
+
+        <div class="result" id="rpsResult"></div>
+    </section>
+
+
+    <!-- MEMORY -->
+    <section class="game">
+        <h2>🧠 Memory</h2>
+
+        <p>Vind alle paren!</p>
+
+        <div id="memory"></div>
+
+        <button onclick="startMemory()">Nieuw spel</button>
+
+        <div class="result" id="memoryResult"></div>
+    </section>
+
+
+    <!-- SNAKE -->
+    <section class="game">
+        <h2>🐍 Snake</h2>
+
+        <p>Gebruik de pijltjestoetsen.</p>
+
+        <canvas id="snakeCanvas" width="240" height="240"></canvas>
+
+        <button onclick="startSnake()">Start Snake</button>
+
+        <div class="result" id="snakeResult"></div>
+    </section>
+
+</main>
+
+<footer>
+    🎮 Mini Game Center — Veel plezier!
+</footer>
+
+
+<script>
+
+    /* =========================
+       KLIK GAME
+    ========================= */
+
+    let clickStart;
+    let clickTimer;
+
+    function startClickGame() {
+        const target = document.getElementById("target");
+
+        document.getElementById("clickResult").textContent =
+            "Wacht op de rode bol...";
+
+        target.style.display = "none";
+
+        let delay = Math.random() * 3000 + 1000;
+
+        clearTimeout(clickTimer);
+
+        clickTimer = setTimeout(() => {
+
+            const area = document.getElementById("clickArea");
+
+            target.style.left =
+                Math.random() * (area.clientWidth - 45) + "px";
+
+            target.style.top =
+                Math.random() * (area.clientHeight - 45) + "px";
+
+            target.style.display = "block";
+
+            clickStart = Date.now();
+
+        }, delay);
+    }
+
+    function hitTarget() {
+
+        if (!clickStart) return;
+
+        let time = Date.now() - clickStart;
+
+        document.getElementById("clickResult").textContent =
+            "⚡ Reactietijd: " + time + " ms";
+
+        document.getElementById("target").style.display = "none";
+
+        clickStart = null;
+    }
+
+
+    /* =========================
+       RAAD HET GETAL
+    ========================= */
+
+    let secretNumber =
+        Math.floor(Math.random() * 100) + 1;
+
+    let guesses = 0;
+
+    function guessNumber() {
+
+        let input =
+            Number(document.getElementById("guessInput").value);
+
+        let result =
+            document.getElementById("guessResult");
+
+        if (!input || input < 1 || input > 100) {
+            result.textContent =
+                "Vul een getal tussen 1 en 100 in!";
+            return;
+        }
+
+        guesses++;
+
+        if (input === secretNumber) {
+
+            result.textContent =
+                "🎉 Goed geraden in " + guesses + " pogingen!";
+
+            secretNumber =
+                Math.floor(Math.random() * 100) + 1;
+
+            guesses = 0;
+
+        } else if (input < secretNumber) {
+
+            result.textContent = "⬆️ Hoger!";
+
+        } else {
+
+            result.textContent = "⬇️ Lager!";
+        }
+    }
+
+
+    /* =========================
+       STEEN PAPIER SCHAAR
+    ========================= */
+
+    function playRPS(player) {
+
+        const choices = [
+            "steen",
+            "papier",
+            "schaar"
+        ];
+
+        const computer =
+            choices[Math.floor(Math.random() * 3)];
+
+        let result = "";
+
+        if (player === computer) {
+
+            result = "🤝 Gelijkspel!";
+
+        } else if (
+            (player === "steen" && computer === "schaar") ||
+            (player === "papier" && computer === "steen") ||
+            (player === "schaar" && computer === "papier")
+        ) {
+
+            result = "🎉 Jij wint!";
+
+        } else {
+
+            result = "😢 Computer wint!";
+        }
+
+        document.getElementById("rpsResult").textContent =
+            "Jij: " + player +
+            " | Computer: " + computer +
+            " → " + result;
+    }
+
+
+    /* =========================
+       MEMORY
+    ========================= */
+
+    const symbols = [
+        "🍎","🍎",
+        "🍌","🍌",
+        "🍕","🍕",
+        "🚀","🚀",
+        "🐱","🐱",
+        "⚽","⚽",
+        "🎮","🎮",
+        "⭐","⭐"
+    ];
+
+    let memoryCards = [];
+    let firstCard = null;
+    let secondCard = null;
+    let locked = false;
+    let matched = 0;
+
+    function startMemory() {
+
+        const board =
+            document.getElementById("memory");
+
+        board.innerHTML = "";
+
+        memoryCards = [...symbols]
+            .sort(() => Math.random() - 0.5);
+
+        firstCard = null;
+        secondCard = null;
+        locked = false;
+        matched = 0;
+
+        document.getElementById("memoryResult").textContent =
+            "";
+
+        memoryCards.forEach((symbol, index) => {
+
+            const card =
+                document.createElement("div");
+
+            card.className = "card";
+            card.textContent = "❓";
+
+            card.dataset.symbol = symbol;
+
+            card.onclick = () =>
+                flipCard(card);
+
+            board.appendChild(card);
+        });
+    }
+
+    function flipCard(card) {
+
+        if (
+            locked ||
+            card.classList.contains("open") ||
+            card === firstCard
+        ) return;
+
+        card.textContent =
+            card.dataset.symbol;
+
+        card.classList.add("open");
+
+        if (!firstCard) {
+
+            firstCard = card;
+
+        } else {
+
+            secondCard = card;
+            locked = true;
+
+            if (
+                firstCard.dataset.symbol ===
+                secondCard.dataset.symbol
+            ) {
+
+                matched++;
+
+                firstCard = null;
+                secondCard = null;
+                locked = false;
+
+                if (matched === symbols.length / 2) {
+                    document.getElementById("memoryResult")
+                        .textContent =
+                        "🏆 Je hebt gewonnen!";
+                }
+
+            } else {
+
+                setTimeout(() => {
+
+                    firstCard.textContent = "❓";
+                    secondCard.textContent = "❓";
+
+                    firstCard.classList.remove("open");
+                    secondCard.classList.remove("open");
+
+                    firstCard = null;
+                    secondCard = null;
+                    locked = false;
+
+                }, 800);
+            }
+        }
+    }
+
+    startMemory();
+
+
+    /* =========================
+       SNAKE
+    ========================= */
+
+    const canvas =
+        document.getElementById("snakeCanvas");
+
+    const ctx = canvas.getContext("2d");
+
+    const grid = 20;
+
+    let snake;
+    let food;
+    let direction;
+    let snakeTimer;
+    let snakeScore = 0;
+
+    function startSnake() {
+
+        snake = [
+            {x: 100, y: 100},
+            {x: 80, y: 100},
+            {x: 60, y: 100}
+        ];
+
+        direction = {
+            x: grid,
+            y: 0
+        };
+
+        snakeScore = 0;
+
+        document.getElementById("snakeResult")
+            .textContent = "Score: 0";
+
+        createFood();
+
+        clearInterval(snakeTimer);
+
+        snakeTimer =
+            setInterval(updateSnake, 120);
+    }
+
+    function createFood() {
+
+        food = {
+            x:
+                Math.floor(
+                    Math.random() *
+                    (canvas.width / grid)
+                ) * grid,
+
+            y:
+                Math.floor(
+                    Math.random() *
+                    (canvas.height / grid)
+                ) * grid
+        };
+    }
+
+    function updateSnake() {
+
+        const head = {
+            x: snake[0].x + direction.x,
+            y: snake[0].y + direction.y
+        };
+
+        // Botsing met muur
+        if (
+            head.x < 0 ||
+            head.y < 0 ||
+            head.x >= canvas.width ||
+            head.y >= canvas.height
+        ) {
+            gameOverSnake();
+            return;
+        }
+
+        // Botsing met zichzelf
+        for (let part of snake) {
+            if (
+                head.x === part.x &&
+                head.y === part.y
+            ) {
+                gameOverSnake();
+                return;
+            }
+        }
+
+        snake.unshift(head);
+
+        if (
+            head.x === food.x &&
+            head.y === food.y
+        ) {
+
+            snakeScore++;
+
+            document.getElementById("snakeResult")
+                .textContent =
+                "Score: " + snakeScore;
+
+            createFood();
+
+        } else {
+
+            snake.pop();
+        }
+
+        drawSnake();
+    }
+
+    function drawSnake() {
+
+        ctx.fillStyle = "#111";
+        ctx.fillRect(
+            0,
+            0,
+            canvas.width,
+            canvas.height
+        );
+
+        // Snake
+        ctx.fillStyle = "#00ff66";
+
+        snake.forEach(part => {
+
+            ctx.fillRect(
+                part.x,
+                part.y,
+                grid - 2,
+                grid - 2
+            );
+        });
+
+        // Voedsel
+        ctx.fillStyle = "red";
+
+        ctx.fillRect(
+            food.x,
+            food.y,
+            grid - 2,
+            grid - 2
+        );
+    }
+
+    function gameOverSnake() {
+
+        clearInterval(snakeTimer);
+
+        document.getElementById("snakeResult")
+            .textContent =
+            "💀 Game over! Score: " + snakeScore;
+    }
+
+    document.addEventListener("keydown", event => {
+
+        if (event.key === "ArrowUp" && direction.y === 0) {
+
+            direction = {
+                x: 0,
+                y: -grid
+            };
+
+        } else if (
+            event.key === "ArrowDown" &&
+            direction.y === 0
+        ) {
+
+            direction = {
+                x: 0,
+                y: grid
+            };
+
+        } else if (
+            event.key === "ArrowLeft" &&
+            direction.x === 0
+        ) {
+
+            direction = {
+                x: -grid,
+                y: 0
+            };
+
+        } else if (
+            event.key === "ArrowRight" &&
+            direction.x === 0
+        ) {
+
+            direction = {
+                x: grid,
+                y: 0
+            };
+        }
+    });
+
+</script>
+
+</body>
+</html>
