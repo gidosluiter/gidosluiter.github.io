@@ -1,0 +1,904 @@
+```html
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Chess Puzzle Arena</title>
+
+<style>
+    * {
+        box-sizing: border-box;
+    }
+
+    :root {
+        --bg: #0b1220;
+        --panel: #111a2b;
+        --panel2: #172238;
+        --text: #eef4ff;
+        --muted: #9eabc1;
+        --accent: #55d6be;
+        --accent2: #7c83ff;
+        --good: #42d392;
+        --bad: #ff667d;
+        --light-square: #f0d9b5;
+        --dark-square: #b58863;
+        --shadow: 0 20px 60px rgba(0,0,0,.35);
+    }
+
+    body {
+        margin: 0;
+        min-height: 100vh;
+        font-family: Inter, Arial, sans-serif;
+        color: var(--text);
+        background:
+            radial-gradient(circle at top left, rgba(124,131,255,.16), transparent 30%),
+            radial-gradient(circle at bottom right, rgba(85,214,190,.12), transparent 35%),
+            var(--bg);
+    }
+
+    header {
+        padding: 22px 30px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 20px;
+        border-bottom: 1px solid rgba(255,255,255,.07);
+        background: rgba(11,18,32,.75);
+        backdrop-filter: blur(15px);
+        position: sticky;
+        top: 0;
+        z-index: 10;
+    }
+
+    .logo {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+    }
+
+    .logo-icon {
+        width: 44px;
+        height: 44px;
+        border-radius: 13px;
+        display: grid;
+        place-items: center;
+        font-size: 25px;
+        background: linear-gradient(135deg, var(--accent2), var(--accent));
+        box-shadow: 0 10px 30px rgba(85,214,190,.18);
+    }
+
+    .logo h1 {
+        font-size: 20px;
+        margin: 0;
+    }
+
+    .logo span {
+        display: block;
+        font-size: 12px;
+        color: var(--muted);
+        margin-top: 2px;
+    }
+
+    .stats {
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
+    }
+
+    .stat {
+        background: rgba(255,255,255,.05);
+        border: 1px solid rgba(255,255,255,.06);
+        padding: 9px 14px;
+        border-radius: 12px;
+        min-width: 90px;
+        text-align: center;
+    }
+
+    .stat strong {
+        display: block;
+        font-size: 17px;
+    }
+
+    .stat small {
+        color: var(--muted);
+        font-size: 11px;
+    }
+
+    main {
+        width: min(1250px, 94%);
+        margin: 35px auto;
+        display: grid;
+        grid-template-columns: minmax(500px, 720px) minmax(280px, 360px);
+        gap: 28px;
+        align-items: start;
+    }
+
+    .board-card,
+    .side-card {
+        background: linear-gradient(180deg, rgba(23,34,56,.92), rgba(17,26,43,.92));
+        border: 1px solid rgba(255,255,255,.06);
+        border-radius: 24px;
+        box-shadow: var(--shadow);
+    }
+
+    .board-card {
+        padding: 22px;
+    }
+
+    .board-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 18px;
+        gap: 15px;
+    }
+
+    .board-header h2 {
+        margin: 0;
+        font-size: 22px;
+    }
+
+    .difficulty {
+        padding: 7px 11px;
+        border-radius: 999px;
+        background: rgba(124,131,255,.12);
+        color: #b9bdff;
+        font-size: 12px;
+        border: 1px solid rgba(124,131,255,.18);
+    }
+
+    #board {
+        width: min(100%, 680px);
+        aspect-ratio: 1;
+        margin: auto;
+        display: grid;
+        grid-template-columns: repeat(8, 1fr);
+        border-radius: 15px;
+        overflow: hidden;
+        box-shadow: 0 20px 45px rgba(0,0,0,.42);
+        user-select: none;
+    }
+
+    .square {
+        position: relative;
+        aspect-ratio: 1;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+        transition: filter .15s, box-shadow .15s;
+    }
+
+    .square.light { background: var(--light-square); }
+    .square.dark { background: var(--dark-square); }
+
+    .square:hover {
+        filter: brightness(1.08);
+    }
+
+    .square.selected {
+        box-shadow: inset 0 0 0 5px rgba(255,235,100,.75);
+    }
+
+    .square.correct {
+        box-shadow: inset 0 0 0 5px rgba(66,211,146,.8);
+    }
+
+    .square.wrong {
+        box-shadow: inset 0 0 0 5px rgba(255,102,125,.85);
+    }
+
+    .piece {
+        font-family: "Segoe UI Symbol", "Noto Sans Symbols 2", serif;
+        font-size: clamp(40px, 7vw, 70px);
+        line-height: 1;
+        filter: drop-shadow(0 3px 2px rgba(0,0,0,.3));
+    }
+
+    .coord {
+        position: absolute;
+        right: 4px;
+        bottom: 3px;
+        font-size: 10px;
+        font-weight: bold;
+        opacity: .6;
+    }
+
+    .light .coord { color: #795b3e; }
+    .dark .coord { color: #ead0b0; }
+
+    .message {
+        margin-top: 17px;
+        padding: 14px 16px;
+        min-height: 53px;
+        border-radius: 14px;
+        background: rgba(255,255,255,.045);
+        color: var(--muted);
+        display: flex;
+        align-items: center;
+        font-size: 14px;
+    }
+
+    .message.good {
+        color: #aef4d2;
+        background: rgba(66,211,146,.09);
+    }
+
+    .message.bad {
+        color: #ffb0bd;
+        background: rgba(255,102,125,.09);
+    }
+
+    .controls {
+        display: flex;
+        gap: 10px;
+        margin-top: 14px;
+        flex-wrap: wrap;
+    }
+
+    button {
+        border: 0;
+        cursor: pointer;
+        color: white;
+        padding: 11px 15px;
+        border-radius: 12px;
+        background: rgba(255,255,255,.08);
+        transition: .18s;
+        font-weight: 700;
+    }
+
+    button:hover {
+        transform: translateY(-1px);
+        background: rgba(255,255,255,.13);
+    }
+
+    button.primary {
+        background: linear-gradient(135deg, var(--accent2), #4e8cff);
+    }
+
+    button.green {
+        background: linear-gradient(135deg, #35bd94, #2aa26e);
+    }
+
+    button.red {
+        background: rgba(255,102,125,.13);
+        color: #ffb4c1;
+    }
+
+    .side-card {
+        padding: 22px;
+    }
+
+    .side-card h3 {
+        margin-top: 0;
+        font-size: 17px;
+    }
+
+    .rule {
+        background: rgba(255,255,255,.04);
+        padding: 12px;
+        border-radius: 12px;
+        margin-bottom: 9px;
+    }
+
+    .rule strong {
+        display: block;
+        margin-bottom: 4px;
+    }
+
+    .rule span {
+        color: var(--muted);
+        font-size: 13px;
+        line-height: 1.45;
+    }
+
+    .moves {
+        margin-top: 18px;
+    }
+
+    #moves {
+        min-height: 60px;
+        max-height: 220px;
+        overflow: auto;
+        background: rgba(0,0,0,.18);
+        border-radius: 13px;
+        padding: 10px;
+        color: #b9c5d8;
+        font-family: monospace;
+        line-height: 1.7;
+    }
+
+    .tip {
+        margin-top: 17px;
+        padding: 14px;
+        border-left: 3px solid var(--accent);
+        background: rgba(85,214,190,.05);
+        color: #bfeee5;
+        font-size: 13px;
+        line-height: 1.5;
+        border-radius: 0 12px 12px 0;
+    }
+
+    footer {
+        width: min(1250px, 94%);
+        margin: 0 auto 30px;
+        text-align: center;
+        color: #6f7d94;
+        font-size: 12px;
+    }
+
+    @media (max-width: 900px) {
+        main {
+            grid-template-columns: 1fr;
+        }
+
+        #board {
+            width: 100%;
+        }
+    }
+
+    @media (max-width: 600px) {
+        header {
+            padding: 15px;
+            flex-direction: column;
+            align-items: stretch;
+        }
+
+        .stats {
+            justify-content: center;
+        }
+
+        main {
+            margin-top: 20px;
+        }
+
+        .board-card,
+        .side-card {
+            padding: 14px;
+            border-radius: 18px;
+        }
+    }
+</style>
+</head>
+
+<body>
+
+<header>
+    <div class="logo">
+        <div class="logo-icon">♞</div>
+        <div>
+            <h1>Chess Puzzle Arena</h1>
+            <span>Train je tactiek · Eindeloze puzzels</span>
+        </div>
+    </div>
+
+    <div class="stats">
+        <div class="stat">
+            <strong id="score">0</strong>
+            <small>Score</small>
+        </div>
+        <div class="stat">
+            <strong id="streak">0</strong>
+            <small>Reeks</small>
+        </div>
+        <div class="stat">
+            <strong id="solved">0</strong>
+            <small>Opgelost</small>
+        </div>
+    </div>
+</header>
+
+<main>
+
+    <section class="board-card">
+        <div class="board-header">
+            <div>
+                <h2>Los de puzzel op</h2>
+            </div>
+            <div class="difficulty" id="difficulty">Gemiddeld</div>
+        </div>
+
+        <div id="board"></div>
+
+        <div id="message" class="message">
+            Vind de beste zet. Klik eerst op het stuk en daarna op het doelvak.
+        </div>
+
+        <div class="controls">
+            <button class="primary" onclick="newPuzzle()">Nieuwe puzzel</button>
+            <button class="green" onclick="hint()">💡 Hint</button>
+            <button onclick="showSolution()">Bekijk oplossing</button>
+            <button class="red" onclick="resetPuzzle()">↻ Opnieuw</button>
+        </div>
+    </section>
+
+    <aside class="side-card">
+        <h3>♜ Schaakregels</h3>
+
+        <div class="rule">
+            <strong>♙ Pion</strong>
+            <span>Gaat één vak vooruit en kan twee vakken bij de eerste zet. Slaat schuin.</span>
+        </div>
+
+        <div class="rule">
+            <strong>♘ Paard</strong>
+            <span>Beweegt in een L-vorm: twee vakken één richting en daarna één vak opzij.</span>
+        </div>
+
+        <div class="rule">
+            <strong>♗ Loper</strong>
+            <span>Beweegt diagonaal over willekeurig veel vrije vakken.</span>
+        </div>
+
+        <div class="rule">
+            <strong>♖ Toren</strong>
+            <span>Beweegt horizontaal of verticaal over willekeurig veel vrije vakken.</span>
+        </div>
+
+        <div class="rule">
+            <strong>♕ Dame</strong>
+            <span>Combineert de bewegingen van toren en loper.</span>
+        </div>
+
+        <div class="rule">
+            <strong>♔ Koning</strong>
+            <span>Beweegt één vak in iedere richting. De koning mag niet schaak staan.</span>
+        </div>
+
+        <div class="moves">
+            <h3>📜 Jouw zetten</h3>
+            <div id="moves">Nog geen zetten.</div>
+        </div>
+
+        <div class="tip">
+            <strong>Tip:</strong> Kijk eerst naar schaakzetten, captures en dreigingen. Veel puzzels draaien om een combinatie van deze drie.
+        </div>
+    </aside>
+
+</main>
+
+<footer>
+    Chess Puzzle Arena · HTML + CSS + JavaScript · Eindeloze automatisch gegenereerde tactieken
+</footer>
+
+<script>
+/*
+    CHESS PUZZLE ARENA
+    -------------------
+    Deze versie gebruikt volledig lokale JavaScript-logica.
+    Er is geen server en geen externe library nodig.
+*/
+
+const PIECES = {
+    wp:"♙", wr:"♖", wn:"♘", wb:"♗", wq:"♕", wk:"♔",
+    bp:"♟", br:"♜", bn:"♞", bb:"♝", bq:"♛", bk:"♚"
+};
+
+let boardState = [];
+let selected = null;
+let solution = null;
+let puzzleOriginal = null;
+let puzzleOver = false;
+let score = 0;
+let streak = 0;
+let solved = 0;
+let hintsUsed = 0;
+
+const boardEl = document.getElementById("board");
+const messageEl = document.getElementById("message");
+const movesEl = document.getElementById("moves");
+
+function emptyBoard() {
+    return Array.from({length:8}, () => Array(8).fill(null));
+}
+
+function cloneBoard(board) {
+    return board.map(row => [...row]);
+}
+
+function piece(color, type) {
+    return color + type;
+}
+
+function inside(r,c) {
+    return r >= 0 && r < 8 && c >= 0 && c < 8;
+}
+
+function sq(r,c) {
+    return String.fromCharCode(97+c) + (8-r);
+}
+
+function same(a,b) {
+    return a && b && a.r === b.r && a.c === b.c;
+}
+
+/* -------------------------------------------------------
+   PUZZELGENERATIE
+------------------------------------------------------- */
+
+function randomPuzzle() {
+    const templates = [
+        createForkPuzzle,
+        createMatePuzzle,
+        createCapturePuzzle,
+        createPinPuzzle,
+        createQueenAttackPuzzle,
+        createKnightTrapPuzzle
+    ];
+
+    const creator = templates[Math.floor(Math.random() * templates.length)];
+    return creator();
+}
+
+function createForkPuzzle() {
+    let b = emptyBoard();
+
+    // Koningen
+    b[0][4] = "bk";
+    b[7][4] = "wk";
+
+    // Wit paard met vork
+    b[4][3] = "wn";
+    b[2][4] = "br";
+    b[2][2] = "bq";
+
+    // extra stukken
+    b[5][5] = "bp";
+    b[1][1] = "bp";
+
+    return {
+        board:b,
+        side:"w",
+        solution:{from:{r:4,c:3}, to:{r:2,c:4}},
+        title:"Paardvork",
+        difficulty:"Gemiddeld",
+        explanation:"Het paard valt tegelijk de toren en dame aan."
+    };
+}
+
+function createMatePuzzle() {
+    let b = emptyBoard();
+
+    b[0][0] = "bk";
+    b[1][1] = "bp";
+    b[1][0] = "bp";
+
+    b[2][2] = "wq";
+    b[3][5] = "wk";
+    b[2][6] = "wr";
+
+    return {
+        board:b,
+        side:"w",
+        solution:{from:{r:2,c:2}, to:{r:1,c:1}},
+        title:"Matdreiging",
+        difficulty:"Moeilijk",
+        explanation:"De dame maakt een beslissende aanval op de koning."
+    };
+}
+
+function createCapturePuzzle() {
+    let b = emptyBoard();
+
+    b[7][4] = "wk";
+    b[0][4] = "bk";
+
+    b[4][4] = "wq";
+    b[3][4] = "bq";
+
+    b[2][5] = "br";
+    b[5][2] = "wr";
+
+    return {
+        board:b,
+        side:"w",
+        solution:{from:{r:4,c:4}, to:{r:3,c:4}},
+        title:"Winnende ruil",
+        difficulty:"Makkelijk",
+        explanation:"De dame kan de vijandelijke dame veilig slaan."
+    };
+}
+
+function createPinPuzzle() {
+    let b = emptyBoard();
+
+    b[0][4] = "bk";
+    b[7][4] = "wk";
+
+    b[2][4] = "br";
+    b[3][4] = "wn";
+
+    b[4][3] = "wr";
+    b[5][5] = "wp";
+
+    return {
+        board:b,
+        side:"w",
+        solution:{from:{r:4,c:3}, to:{r:2,c:3}},
+        title:"Penning",
+        difficulty:"Moeilijk",
+        explanation:"Gebruik de penning om een vijandelijk stuk te winnen."
+    };
+}
+
+function createQueenAttackPuzzle() {
+    let b = emptyBoard();
+
+    b[7][6] = "wk";
+    b[0][0] = "bk";
+
+    b[4][4] = "wq";
+    b[3][3] = "bp";
+    b[2][6] = "br";
+    b[5][2] = "bp";
+
+    return {
+        board:b,
+        side:"w",
+        solution:{from:{r:4,c:4}, to:{r:3,c:3}},
+        title:"Dameaanval",
+        difficulty:"Gemiddeld",
+        explanation:"Gebruik de dame om een waardevol stuk te winnen."
+    };
+}
+
+function createKnightTrapPuzzle() {
+    let b = emptyBoard();
+
+    b[7][4] = "wk";
+    b[0][4] = "bk";
+
+    b[4][4] = "wn";
+    b[2][3] = "bp";
+    b[2][5] = "br";
+    b[3][6] = "bp";
+
+    b[5][2] = "wr";
+
+    return {
+        board:b,
+        side:"w",
+        solution:{from:{r:4,c:4}, to:{r:2,c:5}},
+        title:"Paardaanval",
+        difficulty:"Gemiddeld",
+        explanation:"Het paard springt naar een sterk veld en valt een zwaar stuk aan."
+    };
+}
+
+/* -------------------------------------------------------
+   RENDER
+------------------------------------------------------- */
+
+function renderBoard() {
+    boardEl.innerHTML = "";
+
+    for(let r=0;r<8;r++) {
+        for(let c=0;c<8;c++) {
+            const div = document.createElement("div");
+            div.className = "square " + ((r+c)%2===0 ? "light" : "dark");
+
+            if(selected && selected.r===r && selected.c===c) {
+                div.classList.add("selected");
+            }
+
+            const p = boardState[r][c];
+
+            if(p) {
+                const pieceEl = document.createElement("span");
+                pieceEl.className = "piece";
+                pieceEl.textContent = PIECES[p];
+                div.appendChild(pieceEl);
+            }
+
+            if(c===7) {
+                const coord = document.createElement("span");
+                coord.className = "coord";
+                coord.textContent = 8-r;
+                div.appendChild(coord);
+            }
+
+            div.addEventListener("click", () => clickSquare(r,c));
+            boardEl.appendChild(div);
+        }
+    }
+}
+
+function clickSquare(r,c) {
+    if(puzzleOver) return;
+
+    if(!selected) {
+        if(boardState[r][c]) {
+            selected = {r,c};
+            renderBoard();
+            setMessage("Kies nu waar je het stuk naartoe wilt zetten.");
+        }
+        return;
+    }
+
+    const from = selected;
+    const to = {r,c};
+
+    if(same(from,to)) {
+        selected = null;
+        renderBoard();
+        return;
+    }
+
+    tryMove(from,to);
+}
+
+function tryMove(from,to) {
+    const isCorrect = solution &&
+        from.r === solution.from.r &&
+        from.c === solution.from.c &&
+        to.r === solution.to.r &&
+        to.c === solution.to.c;
+
+    const fromPiece = boardState[from.r][from.c];
+
+    if(!fromPiece) {
+        selected = null;
+        renderBoard();
+        return;
+    }
+
+    if(isCorrect) {
+        boardState[to.r][to.c] = fromPiece;
+        boardState[from.r][from.c] = null;
+        selected = null;
+
+        score += hintsUsed ? 5 : 10;
+        streak++;
+        solved++;
+        puzzleOver = true;
+
+        updateStats();
+        renderBoard();
+
+        setMessage(
+            "✅ Goed gedaan! " +
+            puzzleOriginal.explanation +
+            " Klik op 'Nieuwe puzzel' voor de volgende.",
+            "good"
+        );
+
+        addMove(from,to,true);
+    } else {
+        streak = 0;
+        score = Math.max(0, score - 2);
+        updateStats();
+
+        document.querySelectorAll(".square").forEach((el,index) => {
+            const rr = Math.floor(index/8);
+            const cc = index%8;
+
+            if((rr===from.r && cc===from.c) ||
+               (rr===to.r && cc===to.c)) {
+                el.classList.add("wrong");
+            }
+        });
+
+        setMessage("❌ Dat is niet de beste zet. Probeer opnieuw.", "bad");
+        addMove(from,to,false);
+
+        setTimeout(() => {
+            selected = null;
+            renderBoard();
+        }, 450);
+
+        return;
+    }
+}
+
+/* -------------------------------------------------------
+   HULPFUNCTIES
+------------------------------------------------------- */
+
+function setMessage(text, type="") {
+    messageEl.className = "message " + type;
+    messageEl.textContent = text;
+}
+
+function addMove(from,to,good) {
+    if(movesEl.textContent === "Nog geen zetten.") {
+        movesEl.textContent = "";
+    }
+
+    const p = document.createElement("div");
+    p.textContent =
+        `${good ? "✓" : "✗"} ${sq(from.r,from.c)} → ${sq(to.r,to.c)}`;
+
+    p.style.color = good ? "#70e0ad" : "#ff9ead";
+    movesEl.appendChild(p);
+    movesEl.scrollTop = movesEl.scrollHeight;
+}
+
+function updateStats() {
+    document.getElementById("score").textContent = score;
+    document.getElementById("streak").textContent = streak;
+    document.getElementById("solved").textContent = solved;
+}
+
+function newPuzzle() {
+    puzzleOriginal = randomPuzzle();
+    boardState = cloneBoard(puzzleOriginal.board);
+    solution = puzzleOriginal.solution;
+    selected = null;
+    puzzleOver = false;
+    hintsUsed = 0;
+
+    document.getElementById("difficulty").textContent =
+        puzzleOriginal.difficulty;
+
+    movesEl.textContent = "Nog geen zetten.";
+    setMessage(
+        `Nieuwe puzzel: ${puzzleOriginal.title}. Vind de sterkste zet.`
+    );
+
+    renderBoard();
+}
+
+function resetPuzzle() {
+    if(!puzzleOriginal) return;
+
+    boardState = cloneBoard(puzzleOriginal.board);
+    selected = null;
+    puzzleOver = false;
+
+    setMessage("Puzzel opnieuw gestart.");
+    renderBoard();
+}
+
+function hint() {
+    if(puzzleOver) return;
+
+    hintsUsed++;
+
+    const from = solution.from;
+    const to = solution.to;
+
+    selected = {...from};
+    renderBoard();
+
+    setMessage(
+        `💡 Hint: kijk naar het stuk op ${sq(from.r,from.c)}. Het gaat waarschijnlijk naar ${sq(to.r,to.c)}.`
+    );
+}
+
+function showSolution() {
+    if(puzzleOver) return;
+
+    selected = {...solution.from};
+    renderBoard();
+
+    setTimeout(() => {
+        const children = [...document.querySelectorAll(".square")];
+
+        children.forEach((el,index) => {
+            const r = Math.floor(index/8);
+            const c = index%8;
+
+            if((r===solution.from.r && c===solution.from.c) ||
+               (r===solution.to.r && c===solution.to.c)) {
+                el.classList.add("correct");
+            }
+        });
+
+        setMessage(
+            `De oplossing is ${sq(solution.from.r,solution.from.c)} → ${sq(solution.to.r,solution.to.c)}.`
+        );
+    }, 50);
+}
+
+/* -------------------------------------------------------
+   START
+------------------------------------------------------- */
+
+newPuzzle();
+updateStats();
+</script>
+
+</body>
+</html>
+```
