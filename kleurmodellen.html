@@ -5,11 +5,10 @@
   <meta charset="UTF-8">
   <!-- Hierdoor gebruikt een telefoon zijn echte schermbreedte voor de opmaak. -->
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="RGB en CMYK eenvoudig uitgelegd, met een kleurenmixer en decimale en hexadecimale kleurcodes.">
+  <meta name="description" content="RGB en CMYK eenvoudig uitgelegd, met decimale en hexadecimale kleurcodes.">
   <title>Kleurmodellen | Gido</title>
   <!-- Alle pagina's gebruiken dezelfde CSS voor kleuren, lettertypes en afstanden. -->
   <link rel="stylesheet" href="stylesheet.css">
-  <script src="script.js" defer></script>
 </head>
 <body>
   <a class="skip-link" href="#inhoud">Direct naar de inhoud</a>
@@ -33,14 +32,7 @@
   <!-- src wijst naar een eigen SVG. alt beschrijft de afbeelding als je hem niet kunt zien. -->
   <figure><img src="assets/kleuren.svg" alt="RGB-licht: rood, groen en blauw vormen geel, cyaan, magenta en samen wit." width="800" height="500"></figure>
 </section><section class="section"><div class="grid two"><article class="card"><h2>RGB: licht op je scherm</h2><p>RGB staat voor <strong>rood, groen en blauw</strong>. Elke kleur heeft een waarde van 0 tot en met 255. Een scherm mengt deze drie kleuren licht.</p><p>Dit heet <strong>additief</strong>: je voegt licht toe. Geen licht, <code>rgb(0, 0, 0)</code>, geeft zwart. Alle drie maximaal, <code>rgb(255, 255, 255)</code>, geeft wit.</p></article><article class="card"><h2>CMYK: inkt op papier</h2><p>CMYK staat voor <strong>cyaan, magenta, geel en zwart</strong>. De K staat voor de zwarte drukplaat (key). Dit model wordt gebruikt bij drukwerk.</p><p>Dit heet <strong>subtractief</strong>: inkt absorbeert een deel van het licht dat wit papier terugkaatst. Zwarte inkt helpt om een diepe, duidelijke zwarte kleur te maken.</p></article></div></section>
-<section class="section"><div class="section-heading"><p class="eyebrow">Probeer het zelf</p><h2>Jouw eigen RGB-kleur</h2><p>Verschuif de drie balkjes. De kleur, decimale RGB-waarden en hexcode veranderen mee.</p></div><div class="demo color-demo">
-  <div><noscript><p>Voor de mixer is JavaScript nodig. De tabel hieronder werkt ook zonder.</p></noscript>
-    <!-- Een label hoort bij zijn schuifbalk via for en id. Elke waarde loopt van 0 tot 255. -->
-    <div class="slider-row"><label for="red">Rood</label><input type="range" id="red" min="0" max="255" value="37"><output id="red-value" for="red">37</output></div>
-    <div class="slider-row"><label for="green">Groen</label><input type="range" id="green" min="0" max="255" value="99"><output id="green-value" for="green">99</output></div>
-    <div class="slider-row"><label for="blue">Blauw</label><input type="range" id="blue" min="0" max="255" value="235"><output id="blue-value" for="blue">235</output></div>
-  </div><div><div class="color-preview" id="color-preview" role="img" aria-label="Voorbeeld van de gemengde RGB-kleur"></div><p aria-live="polite">Decimaal: <code id="rgb-output">rgb(37, 99, 235)</code><br>Hexadecimaal: <code id="hex-output">#2563EB</code></p></div>
-</div></section>
+
 <section class="section reading"><h2>Wat betekent een hexcode?</h2><p>Een hexcode begint met een hekje en heeft zes tekens: <strong>#RRGGBB</strong>. Twee tekens voor rood, twee voor groen en twee voor blauw. <code>00</code> is 0 en <code>FF</code> is 255.</p><p>Bij geel staat rood en groen maximaal aan en blauw uit: <code>rgb(255, 255, 0)</code> = <code>#FFFF00</code>.</p></section>
 <section class="section"><div class="table-wrap"><table><thead><tr><th scope="col">Kleur</th><th scope="col">RGB (decimaal)</th><th scope="col">Hexadecimaal</th></tr></thead><tbody><tr><td>Zwart</td><td>0, 0, 0</td><td><code>#000000</code></td></tr><tr><td>Wit</td><td>255, 255, 255</td><td><code>#FFFFFF</code></td></tr><tr><td>Geel</td><td>255, 255, 0</td><td><code>#FFFF00</code></td></tr><tr><td>Oranje</td><td>255, 102, 0</td><td><code>#FF6600</code></td></tr></tbody></table></div><div class="note"><h3>Waarom kleuren op papier anders kunnen zijn</h3><p>Een scherm straalt licht uit; papier reflecteert licht. Niet elke felle RGB-kleur kan een printer precies namaken. Ook papier en inkt beïnvloeden de kleur.</p></div></section><section class="section" aria-labelledby="video-title">
   <div class="section-heading"><p class="eyebrow">Even kijken</p><h2 id="video-title">Uitleg in beeld</h2></div>

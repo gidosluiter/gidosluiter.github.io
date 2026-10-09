@@ -14,7 +14,7 @@ html { scroll-behavior: smooth; }
 body { margin: 0; background: var(--achtergrond); color: var(--tekst); font: 17px/1.7 Arial, sans-serif; }
 a { color: var(--blauw); text-underline-offset: 4px; }
 a:hover { text-decoration-thickness: 2px; }
-a:focus-visible, button:focus-visible, input:focus-visible { outline: 3px solid #9a5700; outline-offset: 5px; }
+a:focus-visible { outline: 3px solid #9a5700; outline-offset: 5px; }
 /* width vult het beschikbare blok; height: auto bewaart de beeldverhouding. */
 img { display: block; width: 100%; height: auto; }
 h1, h2, h3 { line-height: 1.2; letter-spacing: -0.025em; }
@@ -67,18 +67,6 @@ table { width: 100%; border-collapse: collapse; font-size: 0.94rem; }
 th, td { text-align: left; padding: 15px 18px; border-bottom: 1px solid var(--lijn); }
 th { background: var(--lichtblauw); }
 tr:last-child td { border-bottom: 0; }
-.demo { background: var(--wit); border: 1px solid var(--lijn); border-radius: 18px; padding: 30px; }
-.bits { display: grid; grid-template-columns: repeat(8, minmax(0, 1fr)); gap: 10px; max-width: 640px; margin: 24px 0; }
-.bit-cell { text-align: center; }
-.bit-cell small { color: var(--zacht); display: block; margin-bottom: 8px; }
-.bit-button { width: 100%; border: 1px solid #bdcddd; background: var(--lichtblauw); color: var(--tekst); font-size: 1.5rem; font-weight: 700; padding: 12px 0; border-radius: 8px; cursor: pointer; }
-.bit-button[aria-pressed="true"] { color: white; background: var(--blauw); border-color: var(--blauw); }
-.result { font-size: 1.1rem; }
-.result strong { color: var(--blauw); font-size: 1.6rem; }
-.color-demo { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; }
-.slider-row { display: grid; grid-template-columns: 60px 1fr 36px; gap: 12px; align-items: center; margin: 16px 0; }
-input[type="range"] { width: 100%; accent-color: var(--blauw); }
-.color-preview { min-height: 145px; border-radius: 12px; border: 1px solid #899aac; margin-bottom: 16px; background: #2563eb; }
 /* Het videovak blijft in verhouding, ook op een telefoon. */
 .video-grid { display: grid; grid-template-columns: 1.1fr 1fr; gap: 28px; align-items: start; }
 .video-frame { width: 100%; aspect-ratio: 16 / 9; border: 0; border-radius: 14px; background: #e3ecf5; }
@@ -102,12 +90,9 @@ input[type="range"] { width: 100%; accent-color: var(--blauw); }
   main { padding: 0 20px 48px; }
   .hero { grid-template-columns: 1fr; padding: 38px 0 22px; gap: 26px; }
   .hero figure { max-width: 460px; }
-  .grid, .grid.two, .video-grid, .color-demo { grid-template-columns: 1fr; }
+  .grid, .grid.two, .video-grid { grid-template-columns: 1fr; }
   .section { margin-top: 34px; }
-  .card, .demo { padding: 22px; }
-  .bits { gap: 5px; }
-  .bit-cell small { font-size: 0.7rem; }
-  .bit-button { font-size: 1.25rem; padding: 10px 0; }
+  .card { padding: 22px; }
   .footer-inner { padding: 22px 20px; }
 }
 @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }

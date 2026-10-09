@@ -5,11 +5,10 @@
   <meta charset="UTF-8">
   <!-- Hierdoor gebruikt een telefoon zijn echte schermbreedte voor de opmaak. -->
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Leer bits, bytes, binaire getallen en hexadecimaal kennen. Oefen met acht bits en Binary Bonanza.">
+  <meta name="description" content="Leer bits, bytes, binaire getallen en hexadecimaal kennen. Oefen met Binary Bonanza.">
   <title>Binair stelsel | Gido</title>
   <!-- Alle pagina's gebruiken dezelfde CSS voor kleuren, lettertypes en afstanden. -->
   <link rel="stylesheet" href="stylesheet.css">
-  <script src="script.js" defer></script>
 </head>
 <body>
   <a class="skip-link" href="#inhoud">Direct naar de inhoud</a>
@@ -33,20 +32,7 @@
   <!-- src wijst naar een eigen SVG. alt beschrijft de afbeelding als je hem niet kunt zien. -->
   <figure><img src="assets/binair.svg" alt="Acht binaire posities met de gewichten 128 tot en met 1; 00000101 is het getal 5." width="800" height="500"></figure>
 </section><section class="section"><div class="grid two"><article class="card"><h2>Wat is binair?</h2><p>Ons decimale stelsel heeft tien cijfers: 0 tot en met 9. Het binaire stelsel heeft er twee: 0 en 1. Elke positie is twee keer zoveel waard als de positie rechts ervan.</p><p>Van rechts naar links zijn de waarden <strong>1, 2, 4, 8, 16, 32, 64 en 128</strong>. Tel alleen de waarden op waar een 1 staat.</p></article><article class="card"><h2>Bits en bytes</h2><p><strong>8 bits vormen 1 byte.</strong> Met acht bits kun je 2⁸ = 256 verschillende combinaties maken. Daarmee kun je de gehele getallen 0 tot en met 255 opslaan.</p><p>Voorbeeld: <code>00000101</code> = 4 + 1 = <strong>5</strong>. En <code>00001010</code> = 8 + 2 = <strong>10</strong>.</p></article></div></section>
-<section class="section"><div class="section-heading"><p class="eyebrow">Probeer het zelf</p><h2>Maak een getal met acht bits</h2><p>Klik op een bit om te wisselen tussen 0 en 1. Kun jij het getal 13 maken?</p></div><div class="demo">
-  <noscript><p>Schakel JavaScript in voor de oefening. Zonder JavaScript kun je de voorbeelden hierboven gebruiken.</p></noscript>
-  <!-- Elke knop stelt één bit voor. De waarde erboven bepaalt hoeveel hij meetelt. -->
-  <div class="bits" role="group" aria-label="Acht binaire bits">
-<div class="bit-cell"><small>128</small><button class="bit-button" type="button" aria-label="Bit met waarde 128" aria-pressed="false">0</button></div>
-<div class="bit-cell"><small>64</small><button class="bit-button" type="button" aria-label="Bit met waarde 64" aria-pressed="false">0</button></div>
-<div class="bit-cell"><small>32</small><button class="bit-button" type="button" aria-label="Bit met waarde 32" aria-pressed="false">0</button></div>
-<div class="bit-cell"><small>16</small><button class="bit-button" type="button" aria-label="Bit met waarde 16" aria-pressed="false">0</button></div>
-<div class="bit-cell"><small>8</small><button class="bit-button" type="button" aria-label="Bit met waarde 8" aria-pressed="false">0</button></div>
-<div class="bit-cell"><small>4</small><button class="bit-button" type="button" aria-label="Bit met waarde 4" aria-pressed="true">1</button></div>
-<div class="bit-cell"><small>2</small><button class="bit-button" type="button" aria-label="Bit met waarde 2" aria-pressed="false">0</button></div>
-<div class="bit-cell"><small>1</small><button class="bit-button" type="button" aria-label="Bit met waarde 1" aria-pressed="true">1</button></div>
-</div><p class="result" aria-live="polite"><code id="binary-output">00000101</code> = <strong id="decimal-output">5</strong> decimaal</p>
-</div></section>
+
 <section class="section reading"><h2>Van binair naar hexadecimaal</h2><p>Een lang binair getal kun je korter opschrijven in het hexadecimale stelsel. Dat gebruikt zestien tekens: <strong>0–9 en A–F</strong>. A is 10, B is 11 en F is 15.</p><p>Groepeer de bits per vier. <code>1111 1111</code> wordt <code>FF</code>. Dat is decimaal 255. Bij <a href="kleurmodellen.html">kleurmodellen</a> zie je zulke hexadecimale getallen terug.</p></section>
 <section class="section"><div class="section-heading"><h2>Oefenen met Binary Bonanza</h2><p>In dit spel zet je binaire getallen om naar decimale getallen. Klik op de afbeelding en probeer een paar levels.</p></div>
   <!-- De link staat om de afbeelding heen, zodat de hele afbeelding klikbaar is. -->
