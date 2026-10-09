@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="500" viewBox="0 0 800 500" role="img" aria-labelledby="title desc">
+<title id="title">Computers, games en media</title>
+<desc id="desc">Een desktopcomputer, een gamecontroller en een videoscherm laten de interesses computers, gamen en series zien.</desc>
+
+<rect width="800" height="500" rx="28" fill="#eef5fb"/>
+<g font-family="Arial, sans-serif">
+<circle cx="660" cy="112" r="68" fill="#dceafb"/>
+<circle cx="125" cy="382" r="74" fill="#dceafb"/>
+<rect x="142" y="63" width="431" height="274" rx="22" fill="#17324d"/>
+<rect x="158" y="81" width="399" height="230" rx="10" fill="#fff"/>
+<rect x="181" y="105" width="352" height="35" rx="8" fill="#eef5fb"/>
+<circle cx="200" cy="122" r="5" fill="#2563eb"/><circle cx="218" cy="122" r="5" fill="#5b6d80"/><circle cx="236" cy="122" r="5" fill="#5b6d80"/>
+<text x="192" y="193" font-size="31" font-weight="700" fill="#2563eb">&lt;hallo wereld&gt;</text>
+<rect x="192" y="219" width="191" height="12" rx="6" fill="#cedcf0"/>
+<rect x="192" y="248" width="284" height="12" rx="6" fill="#cedcf0"/>
+<path d="M320 337 V366 H395 V337" fill="#17324d"/>
+<rect x="282" y="366" width="151" height="17" rx="8" fill="#17324d"/>
+<rect x="531" y="206" width="208" height="151" rx="20" fill="#2563eb" stroke="#fff" stroke-width="8"/>
+<path d="M615 248 L615 316 L670 282 Z" fill="#fff"/>
+<path d="M130 345 C108 345 97 361 90 390 L83 417 C79 439 91 450 107 450 C120 450 136 429 146 417 H225 C236 432 249 450 263 450 C281 450 292 437 286 416 L279 389 C272 361 261 345 241 345 Z" fill="#fff" stroke="#17324d" stroke-width="9"/>
+<path d="M126 366 V401 M109 383 H143" stroke="#17324d" stroke-width="10" stroke-linecap="round"/>
+<circle cx="239" cy="374" r="9" fill="#2563eb"/><circle cx="257" cy="394" r="9" fill="#5b6d80"/>
+<circle cx="171" cy="405" r="11" fill="#dceafb" stroke="#17324d" stroke-width="4"/><circle cx="204" cy="405" r="11" fill="#dceafb" stroke="#17324d" stroke-width="4"/>
+<text x="550" y="429" text-anchor="middle" font-size="31" font-weight="700" fill="#17324d">Maak. Speel. Ontdek.</text></g>
+</svg>

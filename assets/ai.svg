@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="500" viewBox="0 0 800 500" role="img" aria-labelledby="title desc">
+<title id="title">Gemini op een smartphone</title>
+<desc id="desc">Een algemene smartphone met het label Gemini is verbonden met pictogrammen voor tekst, beeld en spraak. Het toestel stelt geen specifiek telefoonmodel voor.</desc>
+
+<rect width="800" height="500" rx="28" fill="#eef5fb"/>
+<g font-family="Arial, sans-serif">
+<text x="400" y="60" text-anchor="middle" font-size="34" font-weight="700" fill="#17324d">AI op je telefoon</text>
+<path d="M286 245 H204 M514 199 H584 M514 328 H584" fill="none" stroke="#5b6d80" stroke-width="5" stroke-dasharray="9 8"/>
+<rect x="283" y="94" width="234" height="337" rx="31" fill="#17324d"/>
+<rect x="296" y="109" width="208" height="306" rx="21" fill="#fff"/>
+<rect x="369" y="120" width="62" height="7" rx="4" fill="#5b6d80"/>
+<path d="M400 164 C406 198 414 206 448 212 C414 218 406 226 400 260 C394 226 386 218 352 212 C386 206 394 198 400 164 Z" fill="#2563eb"/>
+<text x="400" y="305" text-anchor="middle" font-size="36" font-weight="700" fill="#17324d">Gemini</text>
+<rect x="324" y="333" width="152" height="46" rx="22" fill="#eef5fb"/>
+<text x="400" y="364" text-anchor="middle" font-size="23" fill="#5b6d80">Stel een vraag</text>
+<circle cx="137" cy="245" r="73" fill="#fff"/>
+<path d="M100 215 H174 V261 H133 L117 276 V261 H100 Z" fill="#dceafb" stroke="#2563eb" stroke-width="5" stroke-linejoin="round"/>
+<path d="M114 230 H159 M114 246 H148" stroke="#2563eb" stroke-width="5" stroke-linecap="round"/>
+<text x="137" y="350" text-anchor="middle" font-size="29" font-weight="700" fill="#17324d">Tekst</text>
+<circle cx="654" cy="175" r="68" fill="#fff"/>
+<rect x="614" y="145" width="80" height="59" rx="7" fill="#dceafb" stroke="#2563eb" stroke-width="5"/>
+<path d="M618 199 L641 172 L657 188 L670 175 L691 199" fill="#2563eb"/>
+<circle cx="674" cy="160" r="7" fill="#2563eb"/>
+<text x="654" y="272" text-anchor="middle" font-size="29" font-weight="700" fill="#17324d">Beeld</text>
+<circle cx="654" cy="355" r="68" fill="#fff"/>
+<rect x="640" y="321" width="28" height="45" rx="14" fill="#2563eb"/>
+<path d="M628 352 V361 C628 395 680 395 680 361 V352 M654 386 V400 M638 400 H670" stroke="#2563eb" stroke-width="5" fill="none" stroke-linecap="round"/>
+<text x="654" y="452" text-anchor="middle" font-size="29" font-weight="700" fill="#17324d">Spraak</text></g>
+</svg>

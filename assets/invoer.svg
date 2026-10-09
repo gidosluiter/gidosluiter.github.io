@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="500" viewBox="0 0 800 500" role="img" aria-labelledby="title desc">
+<title id="title">Van invoer naar uitvoer</title>
+<desc id="desc">Een toetsenbord levert invoer. De CPU verwerkt de gegevens. Het beeldscherm laat de uitvoer zien. Pijlen geven de volgorde aan.</desc>
+<defs><marker id="arrow" markerWidth="4" markerHeight="4" refX="3" refY="2" orient="auto"><path d="M0 0 L4 2 L0 4 Z" fill="#2563eb"/></marker></defs>
+<rect width="800" height="500" rx="28" fill="#eef5fb"/>
+<g font-family="Arial, sans-serif">
+<text x="400" y="65" text-anchor="middle" font-size="34" font-weight="700" fill="#17324d">Hoe werkt een computer?</text>
+<rect x="44" y="114" width="219" height="276" rx="20" fill="#fff"/>
+<rect x="291" y="114" width="219" height="276" rx="20" fill="#fff"/>
+<rect x="538" y="114" width="219" height="276" rx="20" fill="#fff"/>
+<text x="153" y="166" text-anchor="middle" font-size="31" font-weight="700" fill="#17324d">Invoer</text>
+<text x="400" y="166" text-anchor="middle" font-size="31" font-weight="700" fill="#17324d">Verwerken</text>
+<text x="647" y="166" text-anchor="middle" font-size="31" font-weight="700" fill="#17324d">Uitvoer</text>
+<rect x="67" y="223" width="172" height="80" rx="10" fill="#eef5fb" stroke="#17324d" stroke-width="5"/>
+<path d="M84 241 H224 M84 261 H224 M84 281 H114 M125 281 H185 M196 281 H224 M103 231 V272 M127 231 V272 M151 231 V272 M175 231 V272 M199 231 V272" stroke="#5b6d80" stroke-width="5"/>
+<path d="M267 260 H282" stroke="#2563eb" stroke-width="6" marker-end="url(#arrow)"/>
+<rect x="349" y="211" width="103" height="103" rx="12" fill="#2563eb"/>
+<path d="M365 200 V185 M389 200 V185 M413 200 V185 M437 200 V185 M365 325 V340 M389 325 V340 M413 325 V340 M437 325 V340 M339 227 H323 M339 251 H323 M339 275 H323 M339 299 H323 M462 227 H478 M462 251 H478 M462 275 H478 M462 299 H478" stroke="#17324d" stroke-width="6" stroke-linecap="round"/>
+<text x="400" y="274" text-anchor="middle" font-size="31" font-weight="700" fill="#fff">CPU</text>
+<path d="M514 260 H529" stroke="#2563eb" stroke-width="6" marker-end="url(#arrow)"/>
+<rect x="570" y="213" width="154" height="96" rx="9" fill="#17324d"/>
+<rect x="579" y="222" width="136" height="76" rx="3" fill="#dceafb"/>
+<path d="M619 248 H680 M619 271 H666" stroke="#2563eb" stroke-width="8" stroke-linecap="round"/>
+<path d="M647 309 V327 M617 330 H677" stroke="#17324d" stroke-width="7" stroke-linecap="round"/>
+<text x="153" y="365" text-anchor="middle" font-size="25" fill="#5b6d80">Toetsenbord</text>
+<text x="647" y="365" text-anchor="middle" font-size="25" fill="#5b6d80">Beeldscherm</text>
+<text x="400" y="450" text-anchor="middle" font-size="28" fill="#17324d">Gegevens in → verwerking → resultaat uit</text></g>
+</svg>

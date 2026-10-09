@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="500" viewBox="0 0 800 500" role="img" aria-labelledby="title desc">
+<title id="title">RGB: kleuren mengen met licht</title>
+<desc id="desc">Drie lichtkleuren overlappen: rood en groen maken geel, rood en blauw maken magenta, groen en blauw maken cyaan. Waar alle drie overlappen, ontstaat wit.</desc>
+<defs><clipPath id="red"><circle cx="322" cy="223" r="117"/></clipPath><clipPath id="green"><circle cx="478" cy="223" r="117"/></clipPath></defs>
+<rect width="800" height="500" rx="28" fill="#eef5fb"/>
+<g font-family="Arial, sans-serif">
+<text x="400" y="58" text-anchor="middle" font-size="34" font-weight="700" fill="#17324d">RGB: mengen met licht</text>
+<rect x="153" y="85" width="494" height="381" rx="24" fill="#17324d"/>
+<circle cx="322" cy="223" r="117" fill="#ff2727"/>
+<circle cx="478" cy="223" r="117" fill="#27e34b"/>
+<circle cx="400" cy="343" r="117" fill="#3174ff"/>
+<g clip-path="url(#red)"><circle cx="478" cy="223" r="117" fill="#ffff3a"/></g>
+<g clip-path="url(#red)"><circle cx="400" cy="343" r="117" fill="#ff42ff"/></g>
+<g clip-path="url(#green)"><circle cx="400" cy="343" r="117" fill="#43ffff"/></g>
+<g clip-path="url(#red)"><g clip-path="url(#green)"><circle cx="400" cy="343" r="117" fill="#fff"/></g></g>
+<text x="270" y="207" text-anchor="middle" font-size="28" font-weight="700" fill="#17324d">Rood</text>
+<text x="531" y="207" text-anchor="middle" font-size="28" font-weight="700" fill="#17324d">Groen</text>
+<text x="400" y="412" text-anchor="middle" font-size="28" font-weight="700" fill="#fff">Blauw</text>
+<text x="400" y="211" text-anchor="middle" font-size="25" font-weight="700" fill="#17324d">Geel</text>
+<text x="338" y="320" text-anchor="middle" font-size="21" font-weight="700" fill="#17324d">Magenta</text>
+<text x="462" y="320" text-anchor="middle" font-size="25" font-weight="700" fill="#17324d">Cyaan</text>
+<text x="400" y="283" text-anchor="middle" font-size="28" font-weight="700" fill="#17324d">Wit</text></g>
+</svg>

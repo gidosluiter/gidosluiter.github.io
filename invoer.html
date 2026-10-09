@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<!-- HTML beschrijft de inhoud. lang="nl" geeft aan dat de tekst Nederlands is. -->
+<html lang="nl">
+<head>
+  <meta charset="UTF-8">
+  <!-- Hierdoor gebruikt een telefoon zijn echte schermbreedte voor de opmaak. -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Eenvoudige uitleg van invoer, verwerking en uitvoer met een voorbeeld uit een game.">
+  <title>Invoer, verwerking en uitvoer | Gido</title>
+  <!-- Alle pagina's gebruiken dezelfde CSS voor kleuren, lettertypes en afstanden. -->
+  <link rel="stylesheet" href="stylesheet.css">
+
+</head>
+<body>
+  <a class="skip-link" href="#inhoud">Direct naar de inhoud</a>
+  <header class="site-header">
+    <div class="header-inner">
+      <a class="brand" href="index.html">Gido<span>.</span></a>
+      <!-- Elke link in het menu opent een ander HTML-bestand. aria-current markeert de huidige pagina. -->
+      <nav class="site-nav" aria-label="Hoofdmenu">
+      <a href="index.html">Home</a>
+      <a href="invoer.html" aria-current="page">Invoer &amp; uitvoer</a>
+      <a href="binair.html">Binair</a>
+      <a href="kleurmodellen.html">Kleurmodellen</a>
+      <a href="compressie.html">Compressie</a>
+      <a href="ai.html">AI</a>
+      </nav>
+    </div>
+  </header>
+  <main id="inhoud">
+<section class="hero">
+  <div><p class="eyebrow">Domein C · 01</p><h1>Van invoer naar uitvoer.</h1><p class="intro">Je typt, klikt of praat. De computer verwerkt die informatie en geeft een resultaat. Dat gebeurt steeds opnieuw.</p></div>
+  <!-- src wijst naar een eigen SVG. alt beschrijft de afbeelding als je hem niet kunt zien. -->
+  <figure><img src="assets/invoer.svg" alt="Een toetsenbord stuurt invoer naar een processor; het resultaat verschijnt op een beeldscherm." width="800" height="500"></figure>
+</section><section class="section"><div class="section-heading"><h2>Drie stappen</h2><p>Dit heet het invoer–verwerking–uitvoer-model.</p></div><div class="grid">
+  <article class="card"><span class="card-number">01 / INVOER</span><h3>Gegevens ontvangen</h3><p>Invoer is alles wat de computer binnenkrijgt. Denk aan een toets die je indrukt, geluid uit een microfoon of een foto van een camera.</p></article>
+  <article class="card"><span class="card-number">02 / VERWERKING</span><h3>Er iets mee doen</h3><p>De processor (CPU) voert de opdrachten van een programma uit. Hij rekent bijvoorbeeld uit waar een speler moet staan. Het werkgeheugen (RAM) bewaart gegevens die op dat moment nodig zijn.</p></article>
+  <article class="card"><span class="card-number">03 / UITVOER</span><h3>Een resultaat geven</h3><p>Uitvoer is het resultaat. Je ziet iets op het scherm, hoort geluid uit de speakers of krijgt een geprint document.</p></article>
+</div></section>
+<section class="section reading"><h2>Een voorbeeld uit een game</h2><p>Je drukt op de spatiebalk: dat is <strong>invoer</strong>. De game controleert of je personage mag springen en berekent de nieuwe positie: dat is <strong>verwerking</strong>. Je ziet het personage springen en hoort een geluid: dat is <strong>uitvoer</strong>.</p><div class="note"><h3>Eén apparaat kan beide doen</h3><p>Een touchscreen laat informatie zien én ontvangt je aanraking. Het is dus een invoer- en uitvoerapparaat.</p></div></section><section class="section" aria-labelledby="video-title">
+  <div class="section-heading"><p class="eyebrow">Even kijken</p><h2 id="video-title">Uitleg in beeld</h2></div>
+  <div class="video-grid">
+    <!-- Een iframe toont de YouTube-video op deze pagina. loading="lazy" laadt hem pas wanneer hij in beeld komt. -->
+    <iframe class="video-frame" src="https://www.youtube-nocookie.com/embed/DKGZlaPlVLY" title="Memory, CPU, Input, &amp; Output" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen referrerpolicy="strict-origin-when-cross-origin"></iframe>
+    <div><h3>Memory, CPU, Input, &amp; Output</h3><p><strong>Waarom deze video?</strong> De video van Code.org verbindt invoer en uitvoer met de processor en het geheugen. Daardoor zie je wat er tussen een klik en het resultaat gebeurt.</p>
+      <!-- Ook de afbeelding is een link naar de video: handig als de speler niet werkt. -->
+      <a class="video-poster" href="https://www.youtube.com/watch?v=DKGZlaPlVLY" target="_blank" rel="noopener noreferrer"><img src="assets/invoer.svg" alt="Illustratie bij het onderwerp"><span>▶ Bekijk de video op YouTube ↗</span></a>
+    </div>
+  </div>
+</section>
+  </main>
+  <!-- De footer is de voettekst onderaan elke pagina. -->
+  <footer class="site-footer"><div class="footer-inner"><span>Gido · Havo 4B · Informatica</span><span><a href="index.html">Home</a><a href="https://github.com/gidosluiter/gidosluiter.github.io" target="_blank" rel="noopener noreferrer">Code op GitHub ↗</a></span></div></footer>
+</body>
+</html>

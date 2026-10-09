@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<!-- HTML beschrijft de inhoud. lang="nl" geeft aan dat de tekst Nederlands is. -->
+<html lang="nl">
+<head>
+  <meta charset="UTF-8">
+  <!-- Hierdoor gebruikt een telefoon zijn echte schermbreedte voor de opmaak. -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Uitleg over bitmap, vector, lossy en lossless compressie, sampling en bestandsgrootte.">
+  <title>Compressie, bitmap en vector | Gido</title>
+  <!-- Alle pagina's gebruiken dezelfde CSS voor kleuren, lettertypes en afstanden. -->
+  <link rel="stylesheet" href="stylesheet.css">
+
+</head>
+<body>
+  <a class="skip-link" href="#inhoud">Direct naar de inhoud</a>
+  <header class="site-header">
+    <div class="header-inner">
+      <a class="brand" href="index.html">Gido<span>.</span></a>
+      <!-- Elke link in het menu opent een ander HTML-bestand. aria-current markeert de huidige pagina. -->
+      <nav class="site-nav" aria-label="Hoofdmenu">
+      <a href="index.html">Home</a>
+      <a href="invoer.html">Invoer &amp; uitvoer</a>
+      <a href="binair.html">Binair</a>
+      <a href="kleurmodellen.html">Kleurmodellen</a>
+      <a href="compressie.html" aria-current="page">Compressie</a>
+      <a href="ai.html">AI</a>
+      </nav>
+    </div>
+  </header>
+  <main id="inhoud">
+<section class="hero">
+  <div><p class="eyebrow">Domein C · 04</p><h1>Kleiner opslaan, slim kiezen.</h1><p class="intro">Een foto, logo en audiobestand bevatten allemaal data. De manier waarop je ze opslaat bepaalt de kwaliteit en de bestandsgrootte.</p></div>
+  <!-- src wijst naar een eigen SVG. alt beschrijft de afbeelding als je hem niet kunt zien. -->
+  <figure><img src="assets/compressie.svg" alt="Vergelijking van een uitvergrote bitmap met zichtbare pixels en een gladde vectorvorm met ankerpunten." width="800" height="500"></figure>
+</section><section class="section"><div class="grid two"><article class="card"><h2>Bitmap: allemaal pixels</h2><p>Een bitmap bestaat uit een raster van pixels. Elke pixel heeft een kleur. Hoe meer pixels, hoe meer detail een afbeelding kan bevatten.</p><p>Bij sterk vergroten zie je de losse pixels en kan de afbeelding blokkerig worden. Bitmap is geschikt voor <strong>foto’s</strong>. Voorbeelden: JPEG en PNG.</p></article><article class="card"><h2>Vector: vormen en lijnen</h2><p>Een vectorafbeelding bewaart een beschrijving van vormen, lijnen, posities en kleuren. De computer tekent de vormen opnieuw op de gewenste grootte.</p><p>Daarom blijft een vector scherp bij vergroten. Dit is handig voor <strong>logo’s en pictogrammen</strong>. Een bekend formaat is SVG. De illustraties op deze site zijn SVG’s.</p></article></div></section>
+<section class="section"><div class="section-heading"><h2>Wat doet compressie?</h2><p>Compressie maakt een bestand kleiner. Dat bespaart opslagruimte en maakt versturen sneller, bijvoorbeeld als je een serie streamt.</p></div><div class="grid two"><article class="card"><h3>Lossless: zonder verlies</h3><p>Alle oorspronkelijke informatie is terug te halen. Herhaling kun je bijvoorbeeld korter beschrijven: <code>36, 36, 36, 36</code> wordt “4 keer 36”. Dat principe heet run-length encoding.</p><p>ZIP gebruikt lossless compressie. PNG bewaart pixels zonder kwaliteitsverlies. Voor tekst en code wil je geen informatie kwijtraken.</p></article><article class="card"><h3>Lossy: met verlies</h3><p>Er wordt informatie weggelaten die minder belangrijk lijkt. Daardoor kan een bestand kleiner worden, maar je kunt het origineel niet helemaal terughalen.</p><p>JPEG wordt vaak gebruikt voor foto’s en MP3 voor geluid. Te sterke compressie kan zichtbare blokken of slechter geluid veroorzaken.</p></article></div><div class="note"><h3>Bitmap/vector en compressie zijn verschillende keuzes</h3><p>Bitmap en vector beschrijven hoe een afbeelding is opgebouwd. Lossy en lossless beschrijven hoe data kleiner wordt opgeslagen. Een bitmap zoals PNG kan dus lossless zijn.</p></div></section>
+<section class="section"><h2>Welk bestand past bij wat?</h2><div class="table-wrap"><table><thead><tr><th scope="col">Formaat</th><th scope="col">Gebruik</th><th scope="col">Eigenschap</th></tr></thead><tbody><tr><td>JPEG / JPG</td><td>Foto’s</td><td>Bitmap, meestal lossy</td></tr><tr><td>PNG</td><td>Screenshots, transparante beelden</td><td>Bitmap, lossless</td></tr><tr><td>SVG</td><td>Logo’s, diagrammen</td><td>Vector, schaalbaar</td></tr><tr><td>MP3</td><td>Muziek, gesproken geluid</td><td>Lossy audiocompressie</td></tr><tr><td>FLAC</td><td>Geluid zonder kwaliteitsverlies</td><td>Lossless audiocompressie</td></tr><tr><td>TXT</td><td>Gewone tekst</td><td>Tekstbestand, zelf geen compressieformaat</td></tr><tr><td>ZIP</td><td>Bestanden samen kleiner opslaan</td><td>Lossless archief</td></tr></tbody></table></div></section>
+<section class="section"><div class="grid two"><article class="card"><h2>Geluid wordt ook data</h2><p>Een microfoon zet trillingen om in een elektrisch signaal. Bij digitaliseren wordt op vaste momenten een waarde gemeten. Dat heet <strong>sampling</strong>.</p><p>De samplefrequentie is het aantal metingen per seconde. Bij 44.100 Hz zijn dat 44.100 metingen per seconde. Een hogere bitdiepte maakt meer mogelijke waarden per meting mogelijk.</p></article><article class="card"><h2>kB, MB, GB en GiB</h2><p>Een byte bestaat uit 8 bits. Decimaal geldt: 1 kB = 1.000 bytes, 1 MB = 1.000 kB, 1 GB = 1.000 MB en 1 TB = 1.000 GB.</p><p>Binaire eenheden gebruiken machten van twee. 1 GiB = 1.073.741.824 bytes. Daarom is 64 GB ongeveer 59,6 GiB: dezelfde hoeveelheid bytes, anders uitgedrukt.</p></article></div></section><section class="section" aria-labelledby="video-title">
+  <div class="section-heading"><p class="eyebrow">Even kijken</p><h2 id="video-title">Uitleg in beeld</h2></div>
+  <div class="video-grid">
+    <!-- Een iframe toont de YouTube-video op deze pagina. loading="lazy" laadt hem pas wanneer hij in beeld komt. -->
+    <iframe class="video-frame" src="https://www.youtube-nocookie.com/embed/LCGkcn1f-ms" title="Text compression widget" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen referrerpolicy="strict-origin-when-cross-origin"></iframe>
+    <div><h3>Text compression widget</h3><p><strong>Waarom deze video?</strong> Met tekst is compressie makkelijk te zien. Deze Code.org-video hoort bij een oefening waarin je tekst kleiner opslaat. Dat geeft een concreet voorbeeld naast de uitleg over afbeeldingen en geluid.</p><p><strong>Het idee in het kort:</strong> herhaalde woorden of stukjes tekst kun je vervangen door kortere verwijzingen. Als je ook bewaart wat elke verwijzing betekent, kun je de oorspronkelijke tekst herstellen. Dat is lossless compressie.</p>
+      <!-- Ook de afbeelding is een link naar de video: handig als de speler niet werkt. -->
+      <a class="video-poster" href="https://www.youtube.com/watch?v=LCGkcn1f-ms" target="_blank" rel="noopener noreferrer"><img src="assets/compressie.svg" alt="Illustratie bij het onderwerp"><span>▶ Bekijk de video op YouTube ↗</span></a>
+    </div>
+  </div>
+</section>
+  </main>
+  <!-- De footer is de voettekst onderaan elke pagina. -->
+  <footer class="site-footer"><div class="footer-inner"><span>Gido · Havo 4B · Informatica</span><span><a href="index.html">Home</a><a href="https://github.com/gidosluiter/gidosluiter.github.io" target="_blank" rel="noopener noreferrer">Code op GitHub ↗</a></span></div></footer>
+</body>
+</html>

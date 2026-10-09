@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<!-- HTML beschrijft de inhoud. lang="nl" geeft aan dat de tekst Nederlands is. -->
+<html lang="nl">
+<head>
+  <meta charset="UTF-8">
+  <!-- Hierdoor gebruikt een telefoon zijn echte schermbreedte voor de opmaak. -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Wat is AI? Lees over taalmodellen, leren met AI en Gemini op een Google Pixel.">
+  <title>AI en mijn Google Pixel | Gido</title>
+  <!-- Alle pagina's gebruiken dezelfde CSS voor kleuren, lettertypes en afstanden. -->
+  <link rel="stylesheet" href="stylesheet.css">
+
+</head>
+<body>
+  <a class="skip-link" href="#inhoud">Direct naar de inhoud</a>
+  <header class="site-header">
+    <div class="header-inner">
+      <a class="brand" href="index.html">Gido<span>.</span></a>
+      <!-- Elke link in het menu opent een ander HTML-bestand. aria-current markeert de huidige pagina. -->
+      <nav class="site-nav" aria-label="Hoofdmenu">
+      <a href="index.html">Home</a>
+      <a href="invoer.html">Invoer &amp; uitvoer</a>
+      <a href="binair.html">Binair</a>
+      <a href="kleurmodellen.html">Kleurmodellen</a>
+      <a href="compressie.html">Compressie</a>
+      <a href="ai.html" aria-current="page">AI</a>
+      </nav>
+    </div>
+  </header>
+  <main id="inhoud">
+<section class="hero">
+  <div><p class="eyebrow">Domein C · 05</p><h1>AI, ook in je broekzak.</h1><p class="intro">AI zit niet alleen in chatbots. Je komt het ook tegen in je telefoon, zoekmachines en apps. Maar hoe werkt het, en wat kun je ermee?</p></div>
+  <!-- src wijst naar een eigen SVG. alt beschrijft de afbeelding als je hem niet kunt zien. -->
+  <figure><img src="assets/ai.svg" alt="Een telefoon met Gemini en verbindingen naar tekst, afbeeldingen en spraak." width="800" height="500"></figure>
+</section><section class="section"><div class="grid two"><article class="card"><h2>Wat is AI?</h2><p>AI staat voor artificiële intelligentie, oftewel kunstmatige intelligentie. AI-systemen leren patronen uit voorbeelden en gebruiken die bij nieuwe taken.</p><p><strong>Generatieve AI</strong> maakt nieuwe inhoud, zoals tekst of een afbeelding. Een taalmodel voorspelt passende volgende stukjes tekst op basis van patronen en de context van je vraag.</p></article><article class="card"><h2>Handig, maar niet altijd juist</h2><p>Een overtuigend antwoord hoeft niet te kloppen. Een taalmodel kan onjuiste informatie produceren. Dat wordt ook wel een <strong>hallucinatie</strong> genoemd.</p><p>Bij schoolwerk is het verstandig om een antwoord met je lesboek of een betrouwbare bron te vergelijken. Geef geen gevoelige persoonlijke informatie mee als dat niet nodig is.</p></article></div></section>
+<section class="section"><div class="section-heading"><p class="eyebrow">Mijn ervaring</p><h2>Hoe ik AI gebruik</h2></div><div class="card reading"><p>Ik gebruik AI vaak. Een concreet voorbeeld van waarvoor ik het gebruik en wat ik daarvan heb geleerd, voeg ik nog toe.</p><p>Om van AI te leren kun je om uitleg vragen, zelf een antwoord proberen en daarna controleren of je het begrijpt. Alleen een antwoord overnemen laat nog niet zien dat je het snapt.</p></div></section>
+<section class="section"><div class="section-heading"><p class="eyebrow">Mijn telefoon</p><h2>Google Pixel met Gemini</h2><p>Ik heb een Google Pixel. Daarop is Gemini geïntegreerd: de AI-assistent van Google.</p></div><div class="grid">
+  <article class="card"><h3>Tekst en vragen</h3><p>Met Gemini kun je vragen stellen, uitleg krijgen en hulp vragen bij het formuleren van tekst.</p></article>
+  <article class="card"><h3>Praten met je telefoon</h3><p>Gemini ondersteunt spraakinvoer en gesprekken. Je kunt dus ook praten in plaats van typen.</p></article>
+  <article class="card"><h3>Informatie uit beelden</h3><p>Je kunt een afbeelding toevoegen en daar een vraag over stellen. Beschikbare functies verschillen per model, taal, account en appversie.</p></article>
+</div><div class="note"><h3>Hetzelfde model: invoer → verwerking → uitvoer</h3><p>Je stelt een vraag aan Gemini (invoer), het AI-model verwerkt de vraag en context (verwerking) en je krijgt een antwoord (uitvoer). Zo komen de onderwerpen op deze website samen.</p></div></section><section class="section" aria-labelledby="video-title">
+  <div class="section-heading"><p class="eyebrow">Even kijken</p><h2 id="video-title">Uitleg in beeld</h2></div>
+  <div class="video-grid">
+    <!-- Een iframe toont de YouTube-video op deze pagina. loading="lazy" laadt hem pas wanneer hij in beeld komt. -->
+    <iframe class="video-frame" src="https://www.youtube-nocookie.com/embed/6NDEoJ4gWtM" title="Introduction to Large Language Models" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen referrerpolicy="strict-origin-when-cross-origin"></iframe>
+    <div><h3>Introduction to Large Language Models</h3><p><strong>Waarom deze video?</strong> Deze introductie van Code.org gaat over grote taalmodellen: het soort technologie achter chatbots zoals Gemini. Dat helpt om te begrijpen hoe zulke systemen tekst maken.</p>
+      <!-- Ook de afbeelding is een link naar de video: handig als de speler niet werkt. -->
+      <a class="video-poster" href="https://www.youtube.com/watch?v=6NDEoJ4gWtM" target="_blank" rel="noopener noreferrer"><img src="assets/ai.svg" alt="Illustratie bij het onderwerp"><span>▶ Bekijk de video op YouTube ↗</span></a>
+    </div>
+  </div>
+</section><section class="section source-list"><h2>Meer weten</h2><p>Bekijk de officiële <a href="https://gemini.google.com/" target="_blank" rel="noopener noreferrer">Gemini-website van Google</a>.</p></section>
+  </main>
+  <!-- De footer is de voettekst onderaan elke pagina. -->
+  <footer class="site-footer"><div class="footer-inner"><span>Gido · Havo 4B · Informatica</span><span><a href="index.html">Home</a><a href="https://github.com/gidosluiter/gidosluiter.github.io" target="_blank" rel="noopener noreferrer">Code op GitHub ↗</a></span></div></footer>
+</body>
+</html>

@@ -1,17 +1,68 @@
 <!DOCTYPE html>
-<html>
-    <head>
-        <title>hasahsasaha</title>
-        <meta charset="utf-8">
-    </head>
-    <body>
-        eerste tekst
+<!-- HTML beschrijft de inhoud. lang="nl" geeft aan dat de tekst Nederlands is. -->
+<html lang="nl">
+<head>
+  <meta charset="UTF-8">
+  <!-- Hierdoor gebruikt een telefoon zijn echte schermbreedte voor de opmaak. -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="De informaticawebsite van Gido uit Havo 4B: over mij, computers, binair, kleuren, compressie en AI.">
+  <title>Home | Gido</title>
+  <!-- Alle pagina's gebruiken dezelfde CSS voor kleuren, lettertypes en afstanden. -->
+  <link rel="stylesheet" href="stylesheet.css">
 
-        <a href="spel.html">geen spelletjes</a>
-        <br>
-        <a href="puzzle.html">puzzles</a>
-        <br>
-        <a href="makreel.html">pagina</a>
-    </body>
-    
+</head>
+<body>
+  <a class="skip-link" href="#inhoud">Direct naar de inhoud</a>
+  <header class="site-header">
+    <div class="header-inner">
+      <a class="brand" href="index.html">Gido<span>.</span></a>
+      <!-- Elke link in het menu opent een ander HTML-bestand. aria-current markeert de huidige pagina. -->
+      <nav class="site-nav" aria-label="Hoofdmenu">
+      <a href="index.html" aria-current="page">Home</a>
+      <a href="invoer.html">Invoer &amp; uitvoer</a>
+      <a href="binair.html">Binair</a>
+      <a href="kleurmodellen.html">Kleurmodellen</a>
+      <a href="compressie.html">Compressie</a>
+      <a href="ai.html">AI</a>
+      </nav>
+    </div>
+  </header>
+  <main id="inhoud">
+<section class="hero">
+  <div><p class="eyebrow">Informatica · Havo 4B</p><h1>Hoi, ik ben Gido.</h1><p class="intro">Welkom op mijn website. Hier vertel ik iets over mezelf en ontdek je hoe computers, kleuren en AI werken.</p><div class="button-row"><a class="button" href="#onderwerpen">Ontdek de onderwerpen</a><a class="button secondary" href="#over-mij">Over mij</a></div></div>
+  <!-- src wijst naar een eigen SVG. alt beschrijft de afbeelding als je hem niet kunt zien. -->
+  <figure><img src="assets/home.svg" alt="Een computer, controller en afspeelknop voor mijn hobby’s gamen en series kijken." width="800" height="500"></figure>
+</section><!-- Korte blokken tekst maken de homepage makkelijk te lezen. -->
+<section class="section" id="over-mij">
+  <div class="section-heading"><p class="eyebrow">Een beetje over mij</p><h2>School, games en series</h2></div>
+  <div class="grid">
+    <article class="card"><span class="card-number">01 / SCHOOL</span><h3>Havo 4B</h3><p>Ik ben Gido en ik zit in Havo 4B. Deze website maak ik voor informatica. De onderwerpen komen uit Domein C.</p></article>
+    <article class="card"><span class="card-number">02 / VRIJE TIJD</span><h3>Gamen</h3><p>Een van mijn hobby’s is gamen. Ook tijdens een game gebeurt er veel in een computer: invoer, berekeningen en beelden op je scherm.</p></article>
+    <article class="card"><span class="card-number">03 / ONTSPANNING</span><h3>Series kijken</h3><p>Ik kijk ook graag series. Een streamingdienst gebruikt compressie om video’s als kleinere bestanden te versturen.</p></article>
+  </div>
+</section>
+<section class="section" id="onderwerpen">
+  <div class="section-heading"><p class="eyebrow">Domein C</p><h2>Wat zit er achter je scherm?</h2><p>Kies een onderwerp. Op elke pagina vind je korte uitleg, een voorbeeld en een video.</p></div>
+  <div class="grid">
+<article class="card topic-card"><span class="card-number">01</span><h3>Invoer, verwerking & uitvoer</h3><p>Van een druk op je toetsenbord tot een beweging in een game.</p><a href="invoer.html">Bekijk de pagina →</a></article>
+<article class="card topic-card"><span class="card-number">02</span><h3>Nul, één, en nog veel meer</h3><p>Leer hoe je met acht bits een getal maakt en probeer het zelf.</p><a href="binair.html">Bekijk de pagina →</a></article>
+<article class="card topic-card"><span class="card-number">03</span><h3>Hoe een scherm kleur maakt</h3><p>Meng rood, groen en blauw en bekijk de bijbehorende kleurcode.</p><a href="kleurmodellen.html">Bekijk de pagina →</a></article>
+<article class="card topic-card"><span class="card-number">04</span><h3>Meer informatie, minder ruimte</h3><p>Ontdek pixels, vectoren en het verschil tussen lossy en lossless.</p><a href="compressie.html">Bekijk de pagina →</a></article>
+<article class="card topic-card"><span class="card-number">05</span><h3>AI in het dagelijks leven</h3><p>Hoe AI werkt en hoe Gemini op een Google Pixel helpt.</p><a href="ai.html">Bekijk de pagina →</a></article>
+<article class="card topic-card"><span class="card-number">EXTRA</span><h3>Even iets anders</h3><p>Mijn bestaande spelletjespagina staat ook nog op deze website. Ook de <a href="puzzle.html">schaakpuzzels</a> en <a href="makreel.html">eerste oefenpagina</a> zijn bewaard.</p><a href="spel.html">Bekijk de pagina →</a></article>
+</div></section><section class="section" aria-labelledby="video-title">
+  <div class="section-heading"><p class="eyebrow">Even kijken</p><h2 id="video-title">Uitleg in beeld</h2></div>
+  <div class="video-grid">
+    <!-- Een iframe toont de YouTube-video op deze pagina. loading="lazy" laadt hem pas wanneer hij in beeld komt. -->
+    <iframe class="video-frame" src="https://www.youtube-nocookie.com/embed/mCq8-xTH7jA" title="What Makes a Computer, a Computer?" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen referrerpolicy="strict-origin-when-cross-origin"></iframe>
+    <div><h3>What Makes a Computer, a Computer?</h3><p><strong>Waarom deze video?</strong> De video van Code.org laat zien wat verschillende computers gemeen hebben. Dat is een goede start voor de onderwerpen op deze site.</p>
+      <!-- Ook de afbeelding is een link naar de video: handig als de speler niet werkt. -->
+      <a class="video-poster" href="https://www.youtube.com/watch?v=mCq8-xTH7jA" target="_blank" rel="noopener noreferrer"><img src="assets/home.svg" alt="Illustratie bij het onderwerp"><span>▶ Bekijk de video op YouTube ↗</span></a>
+    </div>
+  </div>
+</section>
+  </main>
+  <!-- De footer is de voettekst onderaan elke pagina. -->
+  <footer class="site-footer"><div class="footer-inner"><span>Gido · Havo 4B · Informatica</span><span><a href="index.html">Home</a><a href="https://github.com/gidosluiter/gidosluiter.github.io" target="_blank" rel="noopener noreferrer">Code op GitHub ↗</a></span></div></footer>
+</body>
 </html>
